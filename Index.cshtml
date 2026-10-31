@@ -1,0 +1,69 @@
+@using System.Linq
+@model IEnumerable<Database.NET.Models.Product>
+
+@{
+    ViewBag.Title = "Inventory Management";
+}
+
+<h2>Inventory Management</h2>
+
+<p>
+    <strong>Name:</strong> Chithrashree Rajendra Kumar<br />
+    <strong>Enrollment no.:</strong> 92510120018
+</p>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<p>
+    @Html.ActionLink("Add New Product", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.Category</td>
+                <td>@item.Price.ToString("N2")</td>
+                <td>@item.Quantity</td>
+                <td class="actions">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-warning btn-sm" })
+
+                    @using (Html.BeginForm("Delete", "Product", new { id = item.ProductId }, FormMethod.Post,
+                        new { onsubmit = "return confirm('Are you sure you want to delete this product?');" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="6" class="text-center">No products found.</td></tr>
+        }
+    </tbody>
+</table>

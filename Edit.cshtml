@@ -1,0 +1,17 @@
+@model Database.NET.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ProductId)
+    @Html.Partial("_ProductForm", Model)
+
+    <input type="submit" value="Update Product" class="btn btn-primary" />
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+}

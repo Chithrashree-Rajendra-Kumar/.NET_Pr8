@@ -1,0 +1,16 @@
+@model Database.NET.Models.Product
+
+@{
+    ViewBag.Title = "Add Product";
+}
+
+<h2>Add Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("_ProductForm", Model)
+
+    <input type="submit" value="Save Product" class="btn btn-success" />
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+}

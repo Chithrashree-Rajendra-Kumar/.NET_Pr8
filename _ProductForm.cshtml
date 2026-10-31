@@ -1,0 +1,27 @@
+@model Database.NET.Models.Product
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="mb-3">
+    @Html.LabelFor(m => m.ProductName, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", maxlength = 100 })
+    @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+</div>
+
+<div class="mb-3">
+    @Html.LabelFor(m => m.Category, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.Category, new { @class = "form-control", maxlength = 100 })
+    @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+</div>
+
+<div class="mb-3">
+    @Html.LabelFor(m => m.Price, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "0.01", min = "0" })
+    @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+</div>
+
+<div class="mb-3">
+    @Html.LabelFor(m => m.Quantity, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", type = "number", min = "0" })
+    @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+</div>
